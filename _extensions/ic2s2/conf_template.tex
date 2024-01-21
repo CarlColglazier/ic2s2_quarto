@@ -1,0 +1,84 @@
+\PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{authblk}
+\usepackage{graphicx}
+\usepackage{mathptmx}
+\usepackage[singlespacing]{setspace}
+\usepackage[headheight=1in,margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+
+\usepackage[nolists,noheads,nomarkers]{endfloat}
+\usepackage{hyperref}
+
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+
+\makeatletter
+\def\@maketitle{%
+  \newpage
+
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE \@title \par}%
+  \end{center}%
+  \par
+  \vskip 0.1em}
+\makeatother
+
+\fancyhf{} % clear all header and footer fields
+\lhead{} % left header
+\rhead{} % right header
+\lfoot{} % left footer
+\chead{%
+  10$$^{th}$$ International Conference on Computational Social Science IC$$^{2}$$S$$^{2}$$\\
+  July 17-20, 2024, Philadelphia, USA%
+}
+
+$if(mainfont)$
+\ifPDFTeX
+\else
+\babelfont{rm}[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+\fi
+$endif$
+
+$pandoc.tex()$
+
+% Set up bibliography
+$if(biblio-config)$
+$if(natbib)$
+\usepackage[$natbiboptions$]{natbib}
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+$if(biblatex)$
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+$endif$
+$if(nocite-ids)$
+\nocite{$for(nocite-ids)$$it$$sep$, $endfor$}
+$endif$
+
+\title{$title$}
+
+\date{}
+
+
+\begin{document}
+$title.tex()$
+
+$before-body.tex()$
+
+$body$
+
+$before-bib.tex()$
+
+$biblio.tex()$
+\end{document}

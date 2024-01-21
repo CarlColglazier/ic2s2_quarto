@@ -1,0 +1,20 @@
+title: IC2S2 Extended Abstract Format Template
+author: Carl Colglazier
+version: 2024.0.1
+contributes:
+  formats:
+    common:
+      knitr:
+        opts_chunk:
+          echo: false
+    pdf:
+      template: conf_template.tex
+      documentclass: article
+      papersize: a4paper
+      fontsize: 12pt
+      mainfont: "Times New Roman"
+      fig-pos: "htp"
+      reference-section-title: "References"
+      template-partials:
+        - "partials/before-body.tex"
+        - "partials/title.tex"
